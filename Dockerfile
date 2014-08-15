@@ -16,7 +16,4 @@ RUN apt-get install -y apache2 php5 php5-dev php5-pgsql php5-mcrypt php5-imagick
 RUN apt-get install -y libqrencode-dev libzbar-dev libpng12-dev
 
 EXPOSE 80 22
-CMD ["/usr/sbin/init"]
-#EXPOSE 22
-#CMD ["/usr/sbin/sshd", "-D"]
-#ENTRYPOINT /etc/init.d/httpd start && /etc/init.d/sshd start && /bin/bash
+ENTRYPOINT /etc/init.d/apache2 start && /etc/init.d/sshd start && /bin/bash
