@@ -8,7 +8,7 @@ MAINTAINER Dreamsxin "dreamsxin@qq.com"
 # make sure the package repository is up to date
 RUN apt-get update
 
-RUN apt-get install -y openssh-server
+RUN apt-get install -y openssh-server vim
 RUN mkdir /var/run/sshd
 RUN echo 'root:phalcon' |chpasswd
 
@@ -19,8 +19,13 @@ ADD ./cphalcon/ /var/www/cphalcon/
 RUN ls /var/www
 RUN ls /var/www/cphalcon/ext
 RUN  cd /var/www/cphalcon/ext && phpize && ./configure && make && make install
-ADD phalcon.ini /etc/php5/mods-available
-RUN ln -s /etc/php5/mods-available/phalcon.ini /etc/php5/apache2/conf.d
+ADD phalcon.ini /etc/php5/mods-available/phalcon.ini
+RUN ln -s /etc/php5/mods-available/phalcon.ini /etc/php5/apache2/conf.d/
+
+Add ./demo /var/www/demo/
+ADD demo.conf /etc/apache2/sites-available/
+RUN a2ensite demo
+RUN a2enmod rewrite
 
 EXPOSE 80 22
 ENTRYPOINT /etc/init.d/apache2 start && /etc/init.d/ssh start && /bin/bash
