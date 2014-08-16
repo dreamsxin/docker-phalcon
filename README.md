@@ -19,5 +19,5 @@ sudo docker run -ti -p 8080:80 dreamsxin/phalcon:v1.0 -v
 或者直接从Docker Hub下载镜像
 ```shell
 sudo docker pull dreamsxin/phalcon
-sudo docker run -tiP dreamsxin/phalcon
+sudo docker run -tiP dreamsxin/phalcon:v1.0
 ```
